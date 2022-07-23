@@ -1,0 +1,5 @@
+outs:
+- md5: eb06a06f495d5b4d7cdc3c5055fa1cbe.dir
+  size: 0
+  nfiles: 2
+  path: data.xml
