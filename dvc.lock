@@ -1,0 +1,87 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python3 src/prepare.py data/data.xml
+    deps:
+    - path: data/data.xml
+      md5: 22a1a2931c8370d3aeedd7183606fd7f
+      size: 14445097
+    - path: src/prepare.py
+      md5: f09ea0c15980b43010257ccb9f0055e2
+      size: 1576
+    params:
+      params.yaml:
+        prepare.seed: 20170428
+        prepare.split: 0.2
+    outs:
+    - path: data/prepared
+      md5: 153aad06d376b6595932470e459ef42a.dir
+      size: 8437363
+      nfiles: 2
+  featurize:
+    cmd: python3 src/featurization.py data/prepared data/features
+    deps:
+    - path: data/prepared
+      md5: 153aad06d376b6595932470e459ef42a.dir
+      size: 8437363
+      nfiles: 2
+    - path: src/featurization.py
+      md5: e0265fc22f056a4b86d85c3056bc2894
+      size: 2490
+    params:
+      params.yaml:
+        featurize.max_features: 100
+        featurize.ngrams: 1
+    outs:
+    - path: data/features
+      md5: f8f5cbc3188008a7542d02d63054d9d2.dir
+      size: 1556290
+      nfiles: 2
+  train:
+    cmd: python3 src/train.py data/features model.pkl
+    deps:
+    - path: data/features
+      md5: f8f5cbc3188008a7542d02d63054d9d2.dir
+      size: 1556290
+      nfiles: 2
+    - path: src/train.py
+      md5: c3961d777cfbd7727f9fde4851896006
+      size: 967
+    params:
+      params.yaml:
+        train.min_split: 0.01
+        train.n_est: 100
+        train.seed: 20170428
+    outs:
+    - path: model.pkl
+      md5: cd1bb23baf68c0ccfcb2203a94f3ad96
+      size: 3353978
+  evaluate:
+    cmd: python3 src/evaluate.py model.pkl data/features
+    deps:
+    - path: data/features
+      md5: f8f5cbc3188008a7542d02d63054d9d2.dir
+      size: 1556290
+      nfiles: 2
+    - path: model.pkl
+      md5: cd1bb23baf68c0ccfcb2203a94f3ad96
+      size: 3353978
+    - path: src/evaluate.py
+      md5: 44e714021a65edf881b1716e791d7f59
+      size: 2346
+    outs:
+    - path: evaluation.json
+      md5: c53c6e7a2b5e711bff8f5e40f2c036b9
+      size: 71
+    - path: evaluation/importance.png
+      md5: 2d372e2c48764b6b424f313857aed6ad
+      size: 29758
+    - path: evaluation/plots/confusion_matrix.json
+      md5: 3d4b3f76e0e1edf76c538766c5120f39
+      size: 122246
+    - path: evaluation/plots/precision_recall.json
+      md5: 046af5379a4fd1f1722ba4a401f01386
+      size: 150563
+    - path: evaluation/plots/roc.json
+      md5: 31a6dbeeed8e25f25a5dd2734d793ada
+      size: 47943
