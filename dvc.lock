@@ -41,47 +41,47 @@ stages:
     cmd: python3 src/train.py data/features model.pkl
     deps:
     - path: data/features
-      md5: 8a20b9258e038e3b60a05fd1b95ad82a.dir
-      size: 4434866
+      md5: 2874cb3c1fd02fa812c79e9d58747451.dir
+      size: 5213588
       nfiles: 2
     - path: src/train.py
       md5: c3961d777cfbd7727f9fde4851896006
       size: 967
     params:
       params.yaml:
-        train.min_split: 0.01
-        train.n_est: 50
+        train.min_split: 64
+        train.n_est: 200
         train.seed: 20170428
     outs:
     - path: model.pkl
-      md5: fed40b15f9331e440d389972c12be8a3
-      size: 2041035
+      md5: 723510d97333024cba761aa50715a6ab
+      size: 9687897
   evaluate:
     cmd: python3 src/evaluate.py model.pkl data/features
     deps:
     - path: data/features
-      md5: 8a20b9258e038e3b60a05fd1b95ad82a.dir
-      size: 4434866
+      md5: 2874cb3c1fd02fa812c79e9d58747451.dir
+      size: 5213588
       nfiles: 2
     - path: model.pkl
-      md5: fed40b15f9331e440d389972c12be8a3
-      size: 2041035
+      md5: 723510d97333024cba761aa50715a6ab
+      size: 9687897
     - path: src/evaluate.py
       md5: 44e714021a65edf881b1716e791d7f59
       size: 2346
     outs:
     - path: evaluation.json
-      md5: ec51f9b4db2f852bb42767e3b9bc9864
+      md5: 9542c66b495d8e887ba10810699f1f3d
       size: 73
     - path: evaluation/importance.png
-      md5: 06e8e9491de3d8a7b4eb4e1470661e96
-      size: 37662
+      md5: bc3c433d50330d602cee84a95cb33967
+      size: 36598
     - path: evaluation/plots/confusion_matrix.json
-      md5: 9d883e852c4d854b8c95cd82caa2ae7a
+      md5: 455ddd3442468bd1e58a78d4630e5498
       size: 122246
     - path: evaluation/plots/precision_recall.json
-      md5: e2db8a7e468d4cca6f119cbdab1de523
-      size: 100172
+      md5: 74740569bb205e90ac0d2dea0e68d295
+      size: 100108
     - path: evaluation/plots/roc.json
-      md5: ee3c1740e8dfd2a066c6397da35f8092
-      size: 27852
+      md5: db3cbb37f8caad5cd28139138965ded0
+      size: 23012

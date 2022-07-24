@@ -18,8 +18,8 @@ DVC - tutorial
 - dvc exp run --queue -S train.min_split=8
 - dvc exp run --queue -S train.min_split=64
 - dvc exp run --queue -S train.min_split=2 -S train.n_est=100
-- dvc exp run --queue -S train.min_split=8 -S train.n_est=100
-- dvc exp run --queue -S train.min_split=64 -S train.n_est=100
+- dvc exp run --queue -S train.min_split=8 -S train.n_est=50
+- dvc exp run --queue -S train.min_split=64 -S train.n_est=200
 ## Queues experiments
 - dvc exp run --run-all --jobs 2
 ## Runs all of the experiments in parallel
