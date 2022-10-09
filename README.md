@@ -16,7 +16,7 @@ DVC - tutorial
 - git push
 
 # 2 - Cloud Storage
-- dvc remote add -d storage drive://{gdrive link}
+- dvc remote add -d storage gdrive://{gdrive link}
 - git add .dvc/config
 - git commit -m "Configure remote storage"
 - dvc push
